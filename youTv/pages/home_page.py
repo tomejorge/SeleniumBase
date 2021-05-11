@@ -1,4 +1,4 @@
-from seleniumbase import BaseCase
+
 
 class HomePage:
     # LOCATORS

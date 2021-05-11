@@ -1,4 +1,3 @@
-from seleniumbase import BaseCase
 
 
 class PaymentPage:
