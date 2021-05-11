@@ -1,6 +1,3 @@
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
-from seleniumbase import BaseCase
 
 
 class SubscriptionMixPage:
@@ -47,7 +44,8 @@ class SubscriptionMixPage:
             sb.click(self.vaelg_mix_30_button)
             sb.click(self.vaelg_2_mix_30_button)
         else:
-            raise ValueError("can only accept the following mix values %r." % valid_mix)
+            raise ValueError("can only accept the following mix values %r."
+                             % valid_mix)
 
     def assert_points_in_mix_wheel(self, sb, text_expected_in_wheel):
         sb.assert_text(text_expected_in_wheel, self.mix_number_wheel_text)
