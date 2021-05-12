@@ -22,21 +22,19 @@ class TestCreateUser(BaseCase):
         SubscriptionMixPage().select_default_mix(self, 3)
         SubscriptionMixPage().assert_points_in_mix_wheel(self, "3")
         SubscriptionMixPage().click_continue(self)
-        RegistrationPage(). \
-            fill_customer_details(self,
-                                  name=user_details['name'],
-                                  email=random_email,
-                                  phonenumber=user_details['phone_number'],
-                                  password=user_details['password'])
+        RegistrationPage().fill_customer_details(self,
+                                                 name=user_details['name'],
+                                                 email=random_email,
+                                                 phonenumber=user_details['phone_number'],
+                                                 password=user_details['password'])
         RegistrationPage().click_accept_terms(self)
         RegistrationPage().click_accept_marketing(self)
         RegistrationPage().click_continue(self)
-        PaymentPage(). \
-            fill_cc_details(self,
-                            cc_number=user_details['cc_number'],
-                            cc_date=user_details['exp_date'],
-                            cc_cvv=user_details['cvv'],
-                            cc_name=user_details['name'])
+        PaymentPage().fill_cc_details(self,
+                                      cc_number=user_details['cc_number'],
+                                      cc_date=user_details['exp_date'],
+                                      cc_cvv=user_details['cvv'],
+                                      cc_name=user_details['name'])
         HomePage().assert_welcomed(self)
         add_user_data_to_csv(r'users.csv', mix="Mix 3", email=random_email)
 
