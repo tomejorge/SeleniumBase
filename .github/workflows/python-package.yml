@@ -47,6 +47,6 @@ jobs:
       run: |
         echo "def test_1(): pass" > nothing.py
         pytest nothing.py
-    - name: Run tests --browser=chrome --headless
+    - name: Run tests in latest Chrome version
       run: |
-        pytest youtv/tests/test_user_creation.py --browser=chrome --headless -v -s --junit-xml=junit/test-results.xml
+        pytest youtv/tests/test_user_creation.py -v -s --dashboard --html=test_report.html --self-contained-html
