@@ -31,6 +31,7 @@ jobs:
     - name: Install SeleniumBase
       run: |
         python setup.py install
+
     - name: Install Chrome and Firefox
       run: |
         sudo apt install google-chrome-stable
@@ -39,19 +40,23 @@ jobs:
       run: |
         seleniumbase
         sbase
+
     - name: Install chromedriver and geckodriver (Firefox Webdriver)
       run: |
         seleniumbase install chromedriver latest
         seleniumbase install geckodriver latest
+
     - name: Make sure pytest is working
       run: |
         echo "def test_1(): pass" > nothing.py
         pytest nothing.py
-    - name: Run tests in latest Chrome version
+
+    - name: Run tests in latest Chrome stable version
       run: |
         mkdir reports
-        pytest youtv/tests/test_user_creation.py -v -s --dashboard --html=test_report.html --self-contained-html
-    - name: Upload job artifacts
+        pytest youtv/tests/test_user_creation.py -v -s --html=test_report.html
+
+    - name: Upload job artifacts as zip
       if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
@@ -61,3 +66,12 @@ jobs:
             youtv/reports/*.png
             youtv/reports/*.json
             youtv/reports/*
+
+    - name: Update users csv file
+      # allow updating of the csv file with the users created during the test run
+      uses: test-room-7/action-update-file@v1
+      with:
+        file-path: users.csv
+        commit-msg: update the file users.csv with users created in test run
+        allow-removing: true # allow the creation of the file if it does not exists
+        github-token: ${{ secrets.MY_GITHUB_TOKEN }} # authenticates with a token
