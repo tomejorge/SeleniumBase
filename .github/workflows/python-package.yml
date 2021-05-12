@@ -11,7 +11,7 @@ jobs:
 
     env:
       PY_COLORS: "1"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       max-parallel: 6
@@ -19,7 +19,7 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -49,4 +49,15 @@ jobs:
         pytest nothing.py
     - name: Run tests in latest Chrome version
       run: |
+        mkdir reports
         pytest youtv/tests/test_user_creation.py -v -s --dashboard --html=test_report.html --self-contained-html
+    - name: Upload job artifacts
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+          name: test-run-report
+          path: |
+            youtv/reports/*.html
+            youtv/reports/*.png
+            youtv/reports/*.json
+            youtv/reports/*
