@@ -50,7 +50,7 @@ class TestCreateUser(BaseCase):
                                       cc_cvv=user_details['cvv'],
                                       cc_name=user_details['name'])
         HomePage().assert_welcomed(self)
-        add_user_data_to_csv(r'users.csv', mix=mix_name, email=random_email)
+        add_user_data_to_csv(r'../users.csv', mix=mix_name, email=random_email)
 
 
 if __name__ == '__main__':
