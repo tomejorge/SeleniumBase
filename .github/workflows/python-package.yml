@@ -50,8 +50,3 @@ jobs:
     - name: Run tests --browser=chrome --headless
       run: |
         pytest youtv/tests/test_user_creation.py --browser=chrome --headless -v -s --junit-xml=junit/test-results.xml
-    - name: Run tests --browser=firefox --headless
-      run: |
-        pytest youtv/tests/test_user_creation.py --browser=firefox --headless -v -s --junit-xml=junit/test-results.xml
-
-
