@@ -71,7 +71,7 @@ jobs:
       # allow updating of the csv file with the users created during the test run
       uses: test-room-7/action-update-file@v1
       with:
-        file-path: users.csv
+        file-path: youtv/users.csv
         commit-msg: update the file users.csv with users created in test run
         allow-removing: true # allow the creation of the file if it does not exists
         github-token: ${{ secrets.MY_GITHUB_TOKEN }} # authenticates with a token
