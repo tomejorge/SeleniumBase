@@ -19,10 +19,6 @@ def _capture_screenshot(name):
     driver.get_screenshot_as_file(os.path.join(reports_folder, name))
 
 
-def pytest_html_report_title(report):
-    report.title = "YouTv test run report"
-
-
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item):
     """
