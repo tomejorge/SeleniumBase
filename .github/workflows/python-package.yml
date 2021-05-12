@@ -67,11 +67,57 @@ jobs:
             youtv/reports/*.json
             youtv/reports/*
 
-    - name: Update users csv file
-      # allow updating of the csv file with the users created during the test run
-      uses: test-room-7/action-update-file@v1
+#    - name: Update users csv file
+#      # allow updating of the csv file with the users created during the test run
+#      uses: test-room-7/action-update-file@v1
+#      with:
+#        file-path: youtv/users.csv
+#        commit-msg: update the file users.csv
+#        allow-removing: true # allow the creation of the file if it does not exists
+#        github-token: ${{ secrets.MY_GITHUB_TOKEN }} # authenticates with a token
+
+    - name: Add & Commit & Push users.csv
+      uses: EndBug/add-and-commit@v7.2.1
       with:
-        file-path: youtv/users.csv
-        commit-msg: update the file users.csv with users created in test run
-        allow-removing: true # allow the creation of the file if it does not exists
-        github-token: ${{ secrets.MY_GITHUB_TOKEN }} # authenticates with a token
+        # The arguments for the `git add` command (see the paragraph below for more info)
+        # Default: '.'
+        add: '/youtv/users.csv'
+
+        # The name of the user that will be displayed as the author of the commit
+        # Default: depends on the default_author input
+        author_name: Github actions
+
+        # The email of the user that will be displayed as the author of the commit
+        # Default: depends on the default_author input
+        author_email: ttjj@nuuday.dk
+
+        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
+        # Default: '.'
+        cwd: '.'
+
+        # Determines the way the action fills missing author name and email. Three options are available:
+        # - github_actor -> UserName <UserName@users.noreply.github.com>
+        # - user_info -> Your Display Name <your-actual@email.com>
+        # - github_actions -> github-actions <email associated with the github logo>
+        # Default:
+        default_author: github_actor
+
+        # The message for the commit
+        # Default: 'Commit from GitHub Actions (name of the workflow)'
+        message: 'commit users.csv file'
+
+        # The flag used on the pull strategy. Use NO-PULL to avoid the action pulling at all.
+        # Default: '--no-rebase'
+        pull_strategy: 'NO-PULL or --no-rebase or --no-ff or --rebase'
+
+        # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
+        # Default: true
+        push: true
+
+        # Whether to use the --signoff option on `git commit` (only `true` and `false` are accepted)
+        # Default: false
+        signoff: true
+
+        # Arguments for the git tag command (the tag name always needs to be the first word not preceded by an hyphen)
+        # Default: ''
+        tag: 'v1.0.0 --force'
