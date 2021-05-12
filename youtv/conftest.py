@@ -4,7 +4,6 @@ from youtv.utils.ci_utils import is_running_in_ci
 import os
 import pytest
 
-
 home = Path(__file__).resolve().parent
 reports_folder = home.joinpath('reports')
 driver = None
@@ -18,6 +17,10 @@ def pytest_configure(config):
 
 def _capture_screenshot(name):
     driver.get_screenshot_as_file(os.path.join(reports_folder, name))
+
+
+def pytest_html_report_title(report):
+    report.title = "YouTv test run report"
 
 
 @pytest.mark.hookwrapper
@@ -42,4 +45,3 @@ def pytest_runtest_makereport(item):
                       'onclick="window.open(this.src)" align="right"/></div>' % file_name
                 extra.append(pytest_html.extras.html(img))
         report.extra = extra
-
