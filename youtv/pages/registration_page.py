@@ -1,3 +1,6 @@
+from seleniumbase import BaseCase
+
+
 class RegistrationPage:
     # note: name, email and password locators return a list of elements
     name_fields = "input[name='name']"
@@ -10,19 +13,11 @@ class RegistrationPage:
     input_fields = "div[class^='styled__InputWrapper']"
     continue_button = "button[data-testid='continueButton']"
 
-    def fill_customer_details(self, sb, name, email, password, phonenumber):
-        name_fields = sb.find_elements(self.name_fields)
-        email_fields = sb.find_elements(self.email_fields)
-        phone_number_fields = sb.find_elements(self.phone_number_fields)
-        password_fields = sb.find_elements(self.password_fields)
-        name_field = name_fields[0]
-        email_field = email_fields[0]
-        phone_number = phone_number_fields[0]
-        password_field = password_fields[0]
-        name_field.send_keys(name)
-        email_field.send_keys(email)
-        phone_number.send_keys(phonenumber)
-        password_field.send_keys(password)
+    def fill_customer_details(self, sb, name, email, phone_number, password):
+        sb.type(self.name_fields, name)
+        sb.type(self.email_fields, email)
+        sb.type(self.phone_number_fields, phone_number)
+        sb.type(self.password_fields, password)
 
     def click_accept_terms(self, sb):
         sb.click(self.accept_terms_checkbox)
