@@ -79,8 +79,8 @@ jobs:
     - name: Add & Commit & Push users.csv
       uses: EndBug/add-and-commit@v7.2.1
       with:
-        add: '.'
-        author_name: Github actions
+        add: '*.csv'
+        author_name: Github action
         author_email: ttjj@nuuday.dk
         default_author: github_actor
         message: 'commit users.csv file'
